@@ -14,6 +14,7 @@ public class Student {
     private String name;
     private int age;
     private String email;
+    private String gender; // Thêm trường giới tính
 
     // Getter & Setter
 
@@ -47,5 +48,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

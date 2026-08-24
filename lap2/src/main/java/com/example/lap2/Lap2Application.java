@@ -22,35 +22,35 @@ public class Lap2Application {
         return "Hello Spring Boot API";
     }
 
-    // Bài 2: RequestParam
-    @GetMapping("/greet")
+    // Bài 2: PathVariable
+    @GetMapping("/student/{id}")
+    public String getStudent(@PathVariable int id) {
+        return "Sinh viên có mã: " + id;
+    }
+
+    // Bài 3: RequestParam
+    @GetMapping(value = "/student", params = "name")
     public String greet(@RequestParam String name) {
         return "Xin chào " + name;
     }
 
-    // Bài 2: Search
-    @GetMapping("/students/search")
-    public String search(
-            @RequestParam String keyword,
-            @RequestParam(defaultValue = "1") int page) {
+    // Bài 3: RequestParam tìm kiếm
+    @GetMapping("/searchStudent")
+    public String searchStudent(
+            @RequestParam String name,
+            @RequestParam(defaultValue = "1") int age) {
 
-        return "keyword=" + keyword + ", page=" + page;
+        return "Tên=" + name + ", tuổi=" + age;
     }
 
-    // Bài 3: PathVariable
-    @GetMapping("/student/{id}")
-    public String getStudentById(@PathVariable int id) {
-        return "Sinh viên có mã: " + id;
-    }
-
-    // Bài 4: Trả về JSON Object
-    @GetMapping("/student")
+    // Bài 4A: Trả về JSON Object
+    @GetMapping(value = "/student", params = "!name")
     public Student getStudent() {
         return new Student(1, "Nguyễn Văn A", 20);
     }
 
-    // Bài 5: Trả về danh sách Student
-    @GetMapping("/students")
+    // Bài 4B: Trả về danh sách
+    @GetMapping("/studentall")
     public List<Student> getStudents() {
 
         List<Student> list = new ArrayList<>();
@@ -59,5 +59,19 @@ public class Lap2Application {
         list.add(new Student(2, "B", 21));
 
         return list;
+    }
+
+    // Bài 5: RequestHeader
+    @GetMapping("/getstudent")
+    public String getStudents(
+            @RequestHeader("Authorization") String authorization) {
+
+        return "Authorization = " + authorization;
+    }
+
+    // Đường dẫn phụ để xem trên Chrome
+    @GetMapping("/getstudent-web")
+    public String getStudentWeb() {
+        return "Authorization = Bearer abc123";
     }
 }

@@ -1,6 +1,10 @@
 package com.example.lap3.entity;
 
+import java.util.UUID;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,52 +13,53 @@ import jakarta.persistence.Table;
 public class Student {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    private UUID id;
 
-    private String name;
-    private int age;
+    @Column(name = "student_code", nullable = false, unique = true)
+    private String studentCode;
+
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
-    private String gender; // Thêm trường giới tính
 
-    // Getter & Setter
+    @Column(name = "phone")
+    private String phone;
 
-    public int getId() {
-        return id;
-    }
+    @Column(name = "class_name")
+    private String className;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Student() {}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public Student(String studentCode, String fullName, String email, String phone, String className) {
+        this.studentCode = studentCode;
+        this.fullName = fullName;
         this.email = email;
+        this.phone = phone;
+        this.className = className;
     }
 
-    public String getGender() {
-        return gender;
-    }
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+    public String getStudentCode() { return studentCode; }
+    public void setStudentCode(String studentCode) { this.studentCode = studentCode; }
+
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+
+    public String getName() { return fullName; }
+    public void setName(String name) { this.fullName = name; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
 }

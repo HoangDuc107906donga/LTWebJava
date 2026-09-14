@@ -1,29 +1,23 @@
 package com.example.lap3.entity;
 
+import jakarta.persistence.*;
 import java.util.UUID;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "students")
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "student_code", nullable = false, unique = true)
+    @Column(name = "student_code")
     private String studentCode;
 
-    @Column(name = "full_name", nullable = false)
+    @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "phone")
@@ -32,6 +26,7 @@ public class Student {
     @Column(name = "class_name")
     private String className;
 
+    // Constructors
     public Student() {}
 
     public Student(String studentCode, String fullName, String email, String phone, String className) {
@@ -42,6 +37,7 @@ public class Student {
         this.className = className;
     }
 
+    // Getters and Setters
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
 
@@ -50,9 +46,6 @@ public class Student {
 
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
-
-    public String getName() { return fullName; }
-    public void setName(String name) { this.fullName = name; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

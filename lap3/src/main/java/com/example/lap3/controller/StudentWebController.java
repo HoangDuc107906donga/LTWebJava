@@ -34,9 +34,13 @@ public class StudentWebController {
         return "student-add";
     }
 
-    // 3. Xử lý lưu Thêm mới hoặc Cập nhật
+    // 3. Xử lý lưu Thêm mới hoặc Cập nhật (Đã sửa lỗi 500 ép kiểu UUID)
     @PostMapping("/save")
     public String saveStudent(@ModelAttribute("student") Student student) {
+        // Tự tạo UUID mới nếu là tạo mới sinh viên (id bị null)
+        if (student.getId() == null) {
+            student.setId(UUID.randomUUID());
+        }
         studentService.save(student);
         return "redirect:/students";
     }
@@ -58,7 +62,7 @@ public class StudentWebController {
     // 6. Xóa sinh viên
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable UUID id) {
-        studentService.delete(id); // Đã sửa khớp với hàm delete trong StudentService của bạn
+        studentService.delete(id);
         return "redirect:/students";
     }
 }
